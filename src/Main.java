@@ -28,7 +28,7 @@ public class Main {
 
                 // Determinar la conversión basada en la selección del usuario
                 double cantidad = Double.parseDouble(JOptionPane.showInputDialog("Introduce la cantidad a convertir:"));
-                double resultado = 0.0;
+                double resultado = 0;
 
                 switch (seleccion) {
                     case "Convertir de pesos a Dólar":
