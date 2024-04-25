@@ -1,24 +1,34 @@
 import javax.swing.*;
+import java.net.http.HttpResponse;
 
 public class ConversorDeMonedas {
 
     public static void ConvertirDePesosA() {
+        ObtenerDatos obtenerDatos = new ObtenerDatos();
+        Convertir convertir = new Convertir();
+
+        // Obtener los datos de la API
+        HttpResponse<String> response = obtenerDatos.ObtenerDatosApi("https://v6.exchangerate-api.com/v6/31e0c5ddc5211cf106cefcd4/latest/USD");
+
+        // Convertir JSON a objeto Moneda
+        Moneda moneda = convertir.aObjectJava(response);
+
         // Variables para controlar el bucle
         boolean realizarOtraConversion = true;
 
         do {
             // Opciones de conversión
             String[] opciones = {
-                    "Convertir de pesos a Dólar",
-                    "Convertir de pesos a Euros",
-                    "Convertir de pesos a Libras Esterlinas",
-                    "Convertir de pesos a Yen Japonés",
-                    "Convertir de pesos a Won sul-coreano",
-                    "Convertir de Dólar a pesos",
-                    "Convertir de Euros a pesos",
-                    "Convertir de Libras Esterlinas a pesos",
-                    "Convertir de Yen Japonés a pesos",
-                    "Convertir de Won sul-coreano a pesos"
+                    "Convertir de pesos Argentinos a Dólar",
+                    "Convertir de pesos Argentinos a Euros",
+                    "Convertir de pesos Argentinos a Libras Esterlinas",
+                    "Convertir de pesos Argentinos a Yen Japonés",
+                    "Convertir de pesos Argentinos a Won sul-coreano",
+                    "Convertir de Dólar a pesos Argentinos",
+                    "Convertir de Euros a pesos Argentinos",
+                    "Convertir de Libras Esterlinas a pesos Argentinos",
+                    "Convertir de Yen Japonés a pesos Argentinos",
+                    "Convertir de Won sul-coreano a pesos Argentinos"
             };
 
             // Mostrar el menú select y obtener la selección del usuario
@@ -30,42 +40,40 @@ public class ConversorDeMonedas {
                 JOptionPane.showMessageDialog(null, "Operación cancelada");
                 break; // Salir del bucle
             }
-            // Determinar la conversión basada en la selección del usuario
-            double cantidad = obtenerCantidadValida();
-            double resultado = 0;
+
+            double resultado;
 
             switch (seleccion) {
-                case "Convertir de pesos a Dólar":
-                    resultado = convertirAMonedaExtranjera(cantidad, 873.75);
+                case "Convertir de pesos Argentinos a Dólar":
+                    resultado = convertir.convertirMoneda(1, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de pesos a Euros":
-                    resultado = convertirAMonedaExtranjera(cantidad, 934.17);
+                case "Convertir de pesos Argentinos a Euros":
+                    resultado = convertir.convertirMoneda(2, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de pesos a Libras Esterlinas":
-                    resultado = convertirAMonedaExtranjera(cantidad, 1088.17);
+                case "Convertir de pesos Argentinos a Libras Esterlinas":
+                    resultado = convertir.convertirMoneda(3, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de pesos a Yen Japonés":
-                    resultado = convertirAMonedaExtranjera(cantidad, 5.72);
+                case "Convertir de pesos Argentinos a Yen Japonés":
+                    resultado = convertir.convertirMoneda(4, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de pesos a Won sul-coreano":
-                    resultado = convertirAMonedaExtranjera(cantidad, 0.63);
+                case "Convertir de pesos Argentinos a Won sul-coreano":
+                    resultado = convertir.convertirMoneda(5, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de Dólar a pesos":
-                    resultado = convertirAMonedaExtranjera(cantidad, 0.0011450071268668);
+                case "Convertir de Dólar a pesos Argentinos":
+                    resultado = convertir.convertirMoneda(6, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de Euros a pesos":
-                    resultado = convertirAMonedaExtranjera(cantidad, 0.00107);
+                case "Convertir de Euros a pesos Argentinos":
+                    resultado = convertir.convertirMoneda(7, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de Libras Esterlinas a pesos":
-                    resultado = convertirAMonedaExtranjera(cantidad, 0.00091869150854297);
+                case "Convertir de Libras Esterlinas a pesos Argentinos":
+                    resultado = convertir.convertirMoneda(8, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de Yen Japonés a pesos":
-                    resultado = convertirAMonedaExtranjera(cantidad, 0.17779993353274);
+                case "Convertir de Yen Japonés a pesos Argentinos":
+                    resultado = convertir.convertirMoneda(9, obtenerCantidadValida(), moneda);
                     break;
-                case "Convertir de Won sul-coreano a pesos":
-                    resultado = convertirAMonedaExtranjera(cantidad, 1.58);
+                case "Convertir de Won sul-coreano a pesos Argentinos":
+                    resultado = convertir.convertirMoneda(10, obtenerCantidadValida(), moneda);
                     break;
-
                 default:
                     JOptionPane.showMessageDialog(null, "Opción no válida");
                     return;
@@ -83,11 +91,6 @@ public class ConversorDeMonedas {
         } while (realizarOtraConversion);
     }
 
-    // Método para convertir de la moneda de tu país a una moneda extranjera
-    public static double convertirAMonedaExtranjera(double cantidad, double tasa) {
-        return cantidad * tasa;
-    };
-
     // Método para obtener una cantidad válida (valor numérico)
     public static double obtenerCantidadValida() {
         while (true) {
@@ -96,8 +99,7 @@ public class ConversorDeMonedas {
                 if (cantidadStr == null) {
                     throw new NullPointerException(); // Lanza una excepción para manejar la cancelación
                 }
-                double cantidad = Double.parseDouble(cantidadStr);
-                return cantidad;
+                return Double.parseDouble(cantidadStr);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Por favor, introduce un valor numérico válido.");
             } catch (NullPointerException e) {
@@ -106,5 +108,4 @@ public class ConversorDeMonedas {
             }
         }
     }
-
 }
