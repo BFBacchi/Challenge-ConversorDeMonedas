@@ -15,9 +15,9 @@ public class Main {
             ConversorDeMonedas.ConvertirDePesosA();
         } else {
             ConversorDeTemperatura.ConvertirTemperaturas();
-        };
+        }
 
-    };
+    }
 }
 
 
