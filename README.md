@@ -7,6 +7,7 @@ Este es un programa simple de conversión de monedas escrito en Java utilizando 
 - Convierte entre varias monedas incluyendo USD, EUR, GBP, JPY, KRW, etc.
 - Permite múltiples conversiones en una sola sesión.
 - Interfaz amigable para el usuario utilizando cuadros de diálogo JOptionPane.
+- Ademas se le agrego la funcionalidad para obtener los tipos de cambio por medio del consumo de la api de [Enlace a Exchange-rate api](https://v6.exchangerate-api.com) 
 
 ## Cómo Usar
 
@@ -17,7 +18,7 @@ Este es un programa simple de conversión de monedas escrito en Java utilizando 
 
 ## Tutorial en Video
 
-[Mira el tutorial en video](pon_aquí_el_enlace_a_tu_video) para aprender cómo usar el programa.
+[Mira el tutorial en video](https://www.youtube.com/watch?v=82uxvCCCVwI) para aprender cómo usar el programa.
 
 ## Contribuciones
 
