@@ -18,7 +18,7 @@ Este es un programa simple de conversión de monedas escrito en Java utilizando 
 
 ## Tutorial en Video
 
-[Mira el tutorial en video]((https://www.youtube.com/watch?v=82uxvCCCVwI)) para aprender cómo usar el programa.
+[Mira el tutorial en video](https://www.youtube.com/watch?v=82uxvCCCVwI) para aprender cómo usar el programa.
 
 ## Contribuciones
 
